@@ -24,6 +24,9 @@ jobs:
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
           sudo docker image prune -af
 
+      - name: Pull payload image
+        run: sudo podman pull ${{ env.IMAGE }}:latest
+
       - name: Build installer container
         run: |
           sudo podman build \
