@@ -6,7 +6,7 @@ RUN dnf -y install \
     pipewire wireplumber \
     NetworkManager \
     mesa-dri-drivers mesa-vulkan-drivers \
-    dnf-plugins-core \
+    'dnf5-command(copr)' \
     && dnf clean all
 
 RUN dnf -y copr enable pgdev/ghostty && \
