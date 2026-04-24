@@ -40,8 +40,9 @@ jobs:
             -v $(pwd)/output:/output \
             -v /var/lib/containers/storage:/var/lib/containers/storage \
             quay.io/centos-bootc/bootc-image-builder:latest \
-            --type iso \
+            --type bootc-installer \
             --rootfs ext4 \
+            --installer-payload-ref ${{ env.IMAGE }}:latest \
             localhost/installer:latest
 
       - name: Upload to release
