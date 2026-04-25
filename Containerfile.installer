@@ -16,6 +16,7 @@ RUN dnf install -y \
     google-noto-sans-cjk-fonts \
     xorrisofs \
     squashfs-tools \
+    python3-mako \
     && dnf clean all
 
 RUN mkdir -p /boot/efi \
