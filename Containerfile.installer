@@ -37,18 +37,6 @@ RUN printf '%s\n' \
     "bootc --source-imgref registry:${IMAGE}" \
     > /usr/share/anaconda/interactive-defaults.ks
 
-RUN mv /usr/share/anaconda/list-harddrives-stub /usr/bin/list-harddrives && \
-    mv /etc/yum.repos.d /etc/anaconda.repos.d && \
-    ln -s /lib/systemd/system/anaconda.target /etc/systemd/system/default.target && \
-    rm -v /usr/lib/systemd/system-generators/systemd-gpt-auto-generator
-
-RUN rm /usr/lib/systemd/system/autovt@.service \
-    && ln -s /usr/lib/systemd/system/anaconda-shell@.service /usr/lib/systemd/system/autovt@.service
-
-RUN mkdir /usr/lib/systemd/logind.conf.d && \
-    printf '[Login]\nReserveVT=2\n' \
-    > /usr/lib/systemd/logind.conf.d/anaconda-shell.conf
-
 RUN mkdir "$(realpath /root)" && \
     kernel=$(kernel-install list --json pretty | jq -r '.[] | select(.has_kernel == true) | .version') && \
     DRACUT_NO_XATTR=1 dracut --force -v --zstd --reproducible --no-hostonly \
