@@ -17,6 +17,7 @@ RUN dnf install -y \
     xorrisofs \
     squashfs-tools \
     python3-mako \
+    lorax-templates-generic \
     && dnf clean all
 
 RUN mkdir -p /boot/efi \
